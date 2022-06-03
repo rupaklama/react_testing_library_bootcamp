@@ -1,93 +1,22 @@
-import { useState } from "react";
+import React from "react";
 import "./App.css";
-import validator from "validator";
+import Card from "./components/Card/Card";
 
-function App() {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [error, setError] = useState("");
-
-  const { email, password, confirmPassword } = form;
-
-  const handleChange = e => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleClick = e => {
-    e.preventDefault();
-
-    if (!validator.isEmail(email)) {
-      return setError("The email you input is invalid.");
-    } else if (password.length < 5) {
-      return setError("The password you entered should contain 5 or more characters.");
-    } else if (password !== confirmPassword) {
-      return setError("The passwords don't match. Try again.");
-    } else {
-      return setError("");
-    }
-  };
-
+const App = () => {
   return (
-    <div className="container my-5">
-      <form onClick={handleClick}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            value={email}
-            name="email"
-            className="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="password1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            value={password}
-            name="password"
-            className="form-control"
-            id="password1"
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label htmlFor="password2" className="form-label">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            value={confirmPassword}
-            name="confirmPassword"
-            className="form-control"
-            id="password2"
-            onChange={handleChange}
-          />
-        </div>
-
-        {error && <p className="text-danger">{error}</p>}
-
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+    <div>
+      <Card
+        image={{
+          url: "https://images.unsplash.com/photo-1618826411640-d6df44dd3f7a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+          alt: "cute cat",
+        }}
+        name="Tinku"
+        phone="111-111-1111"
+        email="pak@hotmail.com"
+        favoured={false}
+      />
     </div>
   );
-}
+};
 
 export default App;
