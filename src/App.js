@@ -1,16 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import Cards from "./components/Cards/Cards";
-import Filter from "./components/Filter/Filter";
-
-import cats from "./mocks/cats.json";
+import Pets from "./components/Pets/Pets";
 
 const App = () => {
   return (
     <div>
-      <Filter />
-      <Cards cats={cats} />
+      <Pets />
     </div>
   );
 };

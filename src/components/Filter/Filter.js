@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Filter.css";
+
 const Filter = () => {
   return (
     <section className="pet-filter-container">
@@ -11,9 +13,9 @@ const Filter = () => {
           <option value="disliked">Disliked</option>
         </select>
 
-        <div>
+        <div className="filter-container">
           <label htmlFor="gender">Gender</label>
-          <select name="gender" id="gender">
+          <select name="gender" id="gender" className="form-select">
             <option value="any">Any</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
