@@ -12,6 +12,8 @@ const defaultProps = {
     alt: "cute cat",
   },
   favoured: false,
+  updatedFavorite: () => {},
+  index: 1,
 };
 
 describe("Card", () => {
@@ -46,6 +48,7 @@ describe("Card", () => {
   });
 
   test("should show filled heart", () => {
+    // overriding default name prop with new prop, this is the way to do it
     render(<Card {...defaultProps} favoured={true} />);
     expect(screen.getByAltText(/filled heart/i)).toBeInTheDocument();
   });

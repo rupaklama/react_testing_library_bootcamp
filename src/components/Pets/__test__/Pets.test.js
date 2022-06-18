@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { rest } from "msw";
@@ -52,7 +52,6 @@ describe("Pets", () => {
 
       const maleCards = screen.getAllByRole("article");
 
-      // note - comparing with our mock data
       // toStrictEqual - to compare array of object over an array
       expect(maleCards).toStrictEqual([cards[1], cards[3]]);
     });
@@ -65,10 +64,46 @@ describe("Pets", () => {
       // selecting male option
       userEvent.selectOptions(screen.getByLabelText(/gender/i), "female");
 
-      const maleCards = screen.getAllByRole("article");
+      const femaleCards = screen.getAllByRole("article");
 
       // toStrictEqual - to compare array of object over an array
-      expect(maleCards).toStrictEqual([cards[0], cards[2], cards[4]]);
+      expect(femaleCards).toStrictEqual([cards[0], cards[2], cards[4]]);
+    });
+
+    test("should filter for Liked cats", async () => {
+      render(<Pets />);
+
+      const cards = await screen.findAllByRole("article");
+
+      // note - withing() is to find an element within an element, Querying Within Elements
+      // first button
+      const btnForFirstCard = within(cards[0]).getByRole("button");
+      userEvent.click(btnForFirstCard);
+
+      // fourth button
+      const btnForFourthCard = within(cards[3]).getByRole("button");
+      userEvent.click(btnForFourthCard);
+
+      // selecting liked option
+      userEvent.selectOptions(screen.getByLabelText(/favorite/i), "liked");
+
+      expect(await screen.findAllByRole("article")).toEqual([cards[0], cards[3]]);
+    });
+
+    test("should filter for Disliked cats", async () => {
+      render(<Pets />);
+
+      const cards = await screen.findAllByRole("article");
+
+      const btnForFirstCard = within(cards[0]).getByRole("button");
+      userEvent.click(btnForFirstCard);
+
+      const btnForFourthCard = within(cards[3]).getByRole("button");
+      userEvent.click(btnForFourthCard);
+
+      userEvent.selectOptions(screen.getByLabelText(/favorite/i), "disliked");
+
+      expect(await screen.findAllByRole("article")).toEqual([cards[1], cards[2], cards[4]]);
     });
   });
 });

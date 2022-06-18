@@ -5,7 +5,7 @@ import Filter from "../Filter";
 
 describe("Filter", () => {
   test("should be able to change default option value of Favorite Select", () => {
-    render(<Filter />);
+    render(<Filter filters={{}} setFilters={() => {}} />);
 
     const select = screen.getByLabelText(/favorite/i);
     expect(select.value).toBe("any");
@@ -18,7 +18,8 @@ describe("Filter", () => {
   });
 
   test("should be able to change default option value of Gender Select", () => {
-    render(<Filter />);
+    // note - adding default
+    render(<Filter filters={{}} setFilters={() => {}} />);
 
     const select = screen.getByLabelText(/gender/i);
     expect(select.value).toBe("any");
