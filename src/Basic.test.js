@@ -32,6 +32,8 @@ describe("Basic component", () => {
     // note - password element don't have no implicit role 
     // instead query by <label/> element
     const passwordInputElement = screen.getByLabelText("Password");
+    // note - Using regular expression for label text below to be different than above 
+    // since both have same text & if it is same, it will throw error
     const confirmPasswordInputElement = screen.getByLabelText(/confirm password/i);
 
     // 3 - Assertions with matcher
