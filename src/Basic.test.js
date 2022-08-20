@@ -30,6 +30,7 @@ describe("Basic component", () => {
     const emailInputElement = screen.getByRole("textbox", { name: /email address/i });
   
     // note - password element don't have no implicit role 
+    // instead query by <label/> element
     const passwordInputElement = screen.getByLabelText("Password");
     const confirmPasswordInputElement = screen.getByLabelText(/confirm password/i);
 
